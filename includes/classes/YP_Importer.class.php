@@ -255,7 +255,8 @@ class YP_Importer{
 		//first: check if the node name already has a question that we've fetched
 		
 		if( ! array_key_exists($node_name,$this->_xml_code_name_to_question_id_mapping)){
-			$question_obj = new EE_Question($node_name, $node_name, null, 'TEXT', false, null, 10, 1, 1, false);
+			//$question_obj = EE_Question::new_instance(array($node_name, $node_name, null, 'TEXT', false, null, 10, 1, 1, false));
+			$question_obj = EE_Question::new_instance(array('QST_display_text'=>$node_name, 'QST_admin_label'=>$node_name));
 			$question_obj->save();
 			$this->_xml_code_name_to_question_id_mapping[$node_name] = $question_obj->ID();
 			unset($question_obj);
@@ -383,18 +384,23 @@ class YP_Importer{
 		$contact_id = $this->_get_value_of_first_child_node_by_name_on_node('id', $contact_node);
 		
 		
-		$answer_to_id_question_with_this_id = $this->_ANS->get_one(array('QST_ID'=>$id_question,'ANS_value'=>$contact_id));
+		$answer_to_id_question_with_this_id = $this->_ANS->get_one(array(array('QST_ID'=>$id_question,'ANS_value'=>$contact_id)));
 		
 		//if an answer exists, then the attendee on that answer is the one we want. Don't creat ea new attendee
+        //EEH_Debug_Tools::printr($answer_to_id_question_with_this_id, "Should be an answer?", __FILE__, __LINE__);
 		if($answer_to_id_question_with_this_id){
-			$attendee = $answer_to_id_question_with_this_id->attendee();
+            $attendee = $answer_to_id_question_with_this_id->attendee();
+            if (! $attendee) {
+                EEH_Debug_Tools::printr($answer_to_id_question_with_this_id, "Question with Null Attendee", __FILE__, __LINE__);
+            }
 		}else{
 			//otherwise: there is no attendee with an answer to the id question that matches this $contact_node's, so create a new attendee
-			$attendee = new EE_Attendee();
+			$attendee = EE_Attendee::new_instance();
 			//ok so we don't know anything about this attendee yet, but we do want to start saving answers for them
 			//so we need the attendee to have an ID, so we must save it
 			$attendee->save();
-		}
+        }
+        //EEH_Debug_Tools::printr($attendee, "Should be an attendee?", __FILE__, __LINE__);
 		//for each child node of $contact_node which has no children, treat it as a question
 		//(nodes with child nodes will need to be handled specially)
 		foreach($contact_node->childNodes as $child_node){
@@ -409,11 +415,12 @@ class YP_Importer{
 			
 			if( count($child_node->childNodes) <= 1 ){
 				//no child nodes. Treat it as a question, and possibly a property on the attendee
-				$question_id_for_this_node = $this->_get_question_from_node_name($child_node->nodeName);
+                $question_id_for_this_node = $this->_get_question_from_node_name($child_node->nodeName);
+                $ATT_ID = $attendee->ID();
 				//check: do we have an answer for this question with this value?
-				$existing_answer = $this->_ANS->get_one(array('QST_ID'=>$question_id_for_this_node,'ANS_value'=>$child_node->nodeValue,'ATT_ID'=>$attendee->ID()));
+				$existing_answer = $this->_ANS->get_one(array(array('QST_ID'=>$question_id_for_this_node,'ANS_value'=>$child_node->nodeValue,'ATT_ID'=>$ATT_ID)));
 				if( ! $existing_answer){
-					$answer_to_this_question = new EE_Answer(array('QST_ID'=>$question_id_for_this_node, 'ANS_value'=>$child_node->nodeValue,'ATT_ID'=>$attendee->ID()));
+					$answer_to_this_question = EE_Answer::new_instance(array('QST_ID'=>$question_id_for_this_node, 'ANS_value'=>$child_node->nodeValue,'ATT_ID'=>$attendee->ID()));
 //					var_dump($answer_to_this_question);
 //					die;
 					$answer_to_this_question->save();
