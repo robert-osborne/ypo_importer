@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export> 
+	<contact id="58533355"> 
+		<id>58533355</id> 
+		<parent/> 
+		<name>Aaron Beck</name> 
+		<starred>N</starred> 
+		<createdGMT>2012-09-17 04:05:42</createdGMT> 
+		<updatedGMT>2012-09-29 04:11:01</updatedGMT> 
+		<viewedGMT>2012-12-05 20:09:17</viewedGMT> 
+		<personalemail>aaron@thebecks.ca</personalemail> 
+		<businessemail>aaron@thebecks.ca</businessemail> 
+		<custom9496468>WPO Ontario</custom9496468> 
+		<firstname>Aaron </firstname> 
+		<custom9496865>Male</custom9496865> 
+		<lastname>Beck</lastname> 
+		<custom9723235>Child</custom9723235> 
+		<custom9496471>1993-09-01</custom9496471> 
+		<related> 
+			<item id="58517158" note="Member"> 
+				<id>58517158</id> 
+				<parent>58533355</parent> Harvey Beck 
+			</item> 
+		</related> 
+		<categories> 
+			<category id="55283748"> 
+				<id>55283748</id> 
+				<parent>58533355</parent> Type-Child 
+			</category> 
+			<category id="58463444"> 
+				<id>58463444</id> 
+				<parent>58533355</parent> WPO Ontario 
+			</category> 
+			<category id="58759041"> 
+				<id>58759041</id> 
+				<parent>58533355</parent> Status-Active 
+			</category> 
+		</categories> 
+	</contact> 
+	<contact id="58533351"> 
+		<id>58533351</id> 
+		<parent/> 
+		<name>Leslie Routhier</name> 
+		<starred>N</starred> 
+		<createdGMT>2012-09-17 04:05:42</createdGMT> 
+		<updatedGMT>2012-09-29 04:11:01</updatedGMT> 
+		<viewedGMT>2012-12-05 20:09:17</viewedGMT> 
+		<custom9496468>WPO Ontario</custom9496468> 
+		<firstname>Leslie </firstname> 
+		<custom9496865>Female</custom9496865> 
+		<lastname>Routhier</lastname> 
+		<custom9723235>Spouse</custom9723235> 
+        <custom9496471>1993-09-01</custom9496471> 
+		<personalemail>leslie@routhier.ca</personalemail> 
+		<businessemail>leslie@routhier.ca</businessemail> 
+
+		<related> 
+			<item id="58517158" note="Member"> 
+				<id>58517158</id> 
+				<parent>58533351</parent> Harvey Beck 
+			</item> 
+		</related> 
+		<categories> 
+			<category id="55283748"> 
+				<id>55283748</id> 
+				<parent>58533351</parent> Type-Spouse 
+			</category> 
+			<category id="58463444"> 
+				<id>58463444</id> 
+				<parent>58533351</parent> WPO Ontario 
+			</category> 
+			<category id="58759041"> 
+				<id>58759041</id> 
+				<parent>58533351</parent> Status-Active 
+			</category> 
+		</categories> 
+	</contact> 
+	<contact id="58533350"> 
+		<id>58533350</id> 
+		<parent/> 
+		<name>Jake Beck</name> 
+		<starred>N</starred> 
+		<createdGMT>2012-09-17 04:05:42</createdGMT> 
+		<updatedGMT>2012-09-29 04:11:01</updatedGMT> 
+		<viewedGMT>2012-12-05 20:09:17</viewedGMT> 
+		<personalemail>jake@thebecks.ca</personalemail> 
+		<businessemail>jake@thebecks.ca</businessemail> 
+		<custom9496468>WPO Ontario</custom9496468> 
+		<firstname>Jake </firstname> 
+		<custom9496865>Male</custom9496865> 
+		<lastname>Beck</lastname> 
+		<custom9723235>Child</custom9723235> 
+		<custom9496471>1993-09-01</custom9496471> 
+		<related> 
+			<item id="58517158" note="Member"> 
+				<id>58517158</id> 
+				<parent>58533350</parent> Harvey Beck 
+			</item> 
+		</related> 
+		<categories> 
+			<category id="55283748"> 
+				<id>55283748</id> 
+				<parent>58533350</parent> Type-Child 
+			</category> 
+			<category id="58463444"> 
+				<id>58463444</id> 
+				<parent>58533350</parent> WPO Ontario 
+			</category> 
+			<category id="58759041"> 
+				<id>58759041</id> 
+				<parent>58533350</parent> Status-Active 
+			</category> 
+		</categories> 
+	</contact> 
+	<contact id="58533357"> 
+		<id>58533357</id> 
+		<parent/> 
+		<name>Adam Beck</name> 
+		<starred>N</starred> 
+		<createdGMT>2012-09-17 04:05:42</createdGMT> 
+		<updatedGMT>2012-09-29 04:10:59</updatedGMT> 
+		<viewedGMT>2012-11-30 20:56:58</viewedGMT> 
+		<personalemail>adam@thebecks.ca</personalemail> 
+		<businessemail>adam@thebecks.ca</businessemail> 
+		<custom9496468>WPO Ontario</custom9496468> 
+		<firstname>Adam </firstname> 
+		<custom9496865>Male</custom9496865> 
+		<lastname>Beck</lastname> 
+		<custom9723235>Child</custom9723235> 
+		<custom9496471>1997-09-22</custom9496471> 
+		<related> 
+			<item id="58517158" note="Member"> 
+				<id>58517158</id> 
+				<parent>58533357</parent> Harvey Beck 
+			</item> 
+		</related> 
+		<categories> 
+			<category id="55283748"> 
+				<id>55283748</id> 
+				<parent>58533357</parent> Type-Child 
+			</category> 
+			<category id="58463444"> 
+				<id>58463444</id> 
+				<parent>58533357</parent> WPO Ontario 
+			</category> 
+			<category id="58759041"> 
+				<id>58759041</id> 
+				<parent>58533357</parent> Status-Active 
+			</category> 
+		</categories> 
+	</contact> 
+	<contact id="58533300"> 
+		<id>58533300</id> 
+		<parent/> 
+		<name>Raychel Beck</name> 
+		<starred>N</starred> 
+		<createdGMT>2012-09-17 04:05:42</createdGMT> 
+		<updatedGMT>2012-09-29 04:10:59</updatedGMT> 
+		<viewedGMT>2012-11-30 20:56:58</viewedGMT> 
+		<personalemail>raychel@thebecks.ca</personalemail> 
+		<businessemail>raychel@thebecks.ca</businessemail> 
+		<custom9496468>WPO Ontario</custom9496468> 
+		<firstname>Raychel </firstname> 
+		<custom9496865>Female</custom9496865> 
+		<lastname>Beck</lastname> 
+		<custom9723235>Child</custom9723235> 
+		<custom9496471>1997-09-22</custom9496471> 
+		<related> 
+			<item id="58517158" note="Member"> 
+				<id>58517158</id> 
+				<parent>58533300</parent> Harvey Beck 
+			</item> 
+		</related> 
+		<categories> 
+			<category id="55283748"> 
+				<id>55283748</id> 
+				<parent>58533300</parent> Type-Child 
+			</category> 
+			<category id="58463444"> 
+				<id>58463444</id> 
+				<parent>58533300</parent> WPO Ontario 
+			</category> 
+			<category id="58759041"> 
+				<id>58759041</id> 
+				<parent>58533300</parent> Status-Active 
+			</category> 
+		</categories> 
+	</contact> 
+	<contact id="58517158"> 
+		<id>58517158</id> 
+		<parent/> 
+		<name>Harvey Beck</name> 
+		<starred>N</starred> 
+		<createdGMT>2012-09-16 22:07:50</createdGMT> 
+		<updatedGMT>2012-11-09 21:39:14</updatedGMT> 
+		<viewedGMT>2012-12-05 17:06:30</viewedGMT> 
+		<firstname>Harvey</firstname> 
+		<lastname>Beck</lastname> 
+		<title>Mr.</title> 
+		<custom9723235>Member</custom9723235> 
+		<custom9496476>Harvey</custom9496476> 
+		<custom9496468>WPO Ontario</custom9496468> 
+		<homeaddress>166 Owen Boulevard North York, ON, M2P 1G7 Canada</homeaddress> 
+		<businessemail>harvey@thebecks.ca</businessemail> 
+		<personalemail>harvey@thebecks.ca</personalemail> 
+		<custom9496486>Entrepreneur</custom9496486> 
+		<categories> 
+			<category id="55283748"> 
+				<id>55283748</id> 
+				<parent>58517158</parent> Type-Member 
+			</category> 
+			<category id="58463444"> 
+				<id>58463444</id> 
+				<parent>58517158</parent> WPO Ontario 
+			</category> 
+			<category id="58759041"> 
+				<id>58759041</id> 
+				<parent>58517158</parent> Status-Active 
+			</category> 
+		</categories> 
+    </contact> 
+</export>
