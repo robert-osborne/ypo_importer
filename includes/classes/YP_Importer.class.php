@@ -9,17 +9,17 @@ class YP_Importer{
 	 */
 	/**
 	 *
-	 * @var EEM_YPOGroup
+	 * @var EEM_Ypogroup
 	 */
 	protected $_GRP;
 	/**
 	 *
-	 * @var EEM_YPOGroup_Type
+	 * @var EEM_Ypogroup_Type
 	 */
 	protected $_GPT;
 	/**
 	 *
-	 * @var EEM_YPOGroup_Role
+	 * @var EEM_Ypogroup_Role
 	 */
 	protected $_GRR;
 	/**
@@ -48,27 +48,27 @@ class YP_Importer{
 	 */
 	/**
 	 *
-	 * @var EE_YPOGroup_Type
+	 * @var EE_Ypogroup_Type
 	 */
 	var $_org_group_type = null;
 	/**
 	 *
-	 * @var EE_YPOGroup_Role
+	 * @var EE_Ypogroup_Role
 	 */
 	var $_org_member_role = null;
 	/**
 	 *
-	 * @var EE_YPOGroup_Role
+	 * @var EE_Ypogroup_Role
 	 */
 	var $_spouse_role = null;
 	/**
 	 *
-	 * @var EE_YPOGroup_Role
+	 * @var EE_Ypogroup_Role
 	 */
 	var $_child_role = null;
 	/**
 	 *
-	 * @var EE_YPOGroup_Role
+	 * @var EE_Ypogroup_Role
 	 */
 	var $_associate_role = null;
 	/**
@@ -78,7 +78,7 @@ class YP_Importer{
 	var $_xml_code_name_to_question_id_mapping;
 	/**
 	 *
-	 * @var array, keys are xml contact ids (from xml) values are EE_YPOGroup IDs
+	 * @var array, keys are xml contact ids (from xml) values are EE_Ypogroup IDs
 	 */
 	var $_xml_contact_id_to_group_id_mapping;
 	/**
@@ -137,17 +137,17 @@ class YP_Importer{
 	 */
 	protected function _require_needed_files(){
 		/* require_once('EEM_Promotion.model.php');
-		require_once('EEM_YPOGroup.model.php');
-        require_once('EE_YPOGroup.class.php'); */
-		$this->_GRP = EEM_YPOGroup::instance();
+		require_once('EEM_Ypogroup.model.php');
+        require_once('EE_Ypogroup.class.php'); */
+		$this->_GRP = EEM_Ypogroup::instance();
 		
-		/* require_once('EEM_YPOGroup_Role.model.php');
-        require_once('EE_YPOGroup_Role.class.php'); */
-		$this->_GRR = EEM_YPOGroup_Role::instance();
+		/* require_once('EEM_Ypogroup_Role.model.php');
+        require_once('EE_Ypogroup_Role.class.php'); */
+		$this->_GRR = EEM_Ypogroup_Role::instance();
 		
-		/*require_once('EEM_YPOGroup_Type.model.php');
-        require_once('EE_YPOGroup_Type.class.php'); */
-		$this->_GPT = EEM_YPOGroup_Type::instance();
+		/*require_once('EEM_Ypogroup_Type.model.php');
+        require_once('EE_Ypogroup_Type.class.php'); */
+		$this->_GPT = EEM_Ypogroup_Type::instance();
 		
         /*
         require_once('EEM_Attendee.model.php');
@@ -177,20 +177,14 @@ class YP_Importer{
 		//if the option hasnt already been set, then we must create the group type and roles
 		//and then save the option for future use
 		if ( ! $yp_group_type_and_roles_IDs){
-			$this->_org_group_type = new EE_YPOGroup_Type(YP_Importer::default_group_type_name, 'Default Group Type for a YP Organization Member and family and associates');
+			$this->_org_group_type = new EE_Ypogroup_Type(YP_Importer::default_group_type_name, 'Default Group Type for a YP Organization Member and family and associates');
 			$this->_org_group_type->save();
 			
-			$this->_org_member_role = new EE_YPOGroup_Role(YP_Importer::default_org_member_role_name, 'The YP Member', array('register_self','register_others'), $this->_org_group_type->ID());
-			$this->_org_member_role->save();
-			
-			$this->_spouse_role = new EE_YPOGroup_Role(YP_Importer::default_spouse_role_name, 'The Spouse of the YP Member', array('register_self'), $this->_org_group_type->ID());
-			$this->_spouse_role->save();
-			
-			$this->_child_role = new EE_YPOGroup_Role(YP_Importer::default_child_role_name, 'Family (especially children) of the YP Member', array(), $this->_org_group_type->ID());
-			$this->_child_role->save();
-			
-			$this->_associate_role = new EE_YPOGroup_Role(YP_Importer::default_associate_role_name, 'Associate of the YP Member ', array(), $this->_org_group_type->ID());
-			$this->_associate_role->save();
+			$default_roles = $this->_org_group_type->add_default_roles();
+			$this->_org_member_role = $default_roles[0];
+			$this->_spouse_role = $default_roles[1];
+			$this->_child_role = $default_roles[2];
+			$this->_associate_role = $default_roles[3];
 			$yp_group_type_and_roles_IDs = array(
 				YP_Importer::default_group_type_name => $this->_org_group_type->ID(),
 				YP_Importer::default_org_member_role_name => $this->_org_member_role->ID(),
@@ -205,16 +199,16 @@ class YP_Importer{
 			$group_type_id = $yp_group_type_and_roles_IDs[YP_Importer::default_group_type_name];
 			$this->_org_group_type = $this->_GPT->get_one_by_ID($group_type_id);
 			
-			$org_member_role = $yp_group_type_and_roles_IDs[YP_Importer::default_org_member_role_name];
+			$org_member_role = $yp_group_type_and_roles_IDs[EE_Ypogroup_Type::default_org_member_role_name];
 			$this->_org_member_role = $this->_GRR->get_one_by_ID($org_member_role);
 			
-			$spouse_role = $yp_group_type_and_roles_IDs[YP_Importer::default_spouse_role_name];
+			$spouse_role = $yp_group_type_and_roles_IDs[EE_Ypogroup_Type::default_spouse_role_name];
 			$this->_spouse_role = $this->_GRR->get_one_by_ID($spouse_role);
 			
-			$child_role = $yp_group_type_and_roles_IDs[YP_Importer::default_child_role_name];
+			$child_role = $yp_group_type_and_roles_IDs[EE_Ypogroup_Type::default_child_role_name];
 			$this->_child_role = $this->_GRR->get_one_by_ID($child_role);
 			
-			$associate_role = $yp_group_type_and_roles_IDs[YP_Importer::default_associate_role_name];
+			$associate_role = $yp_group_type_and_roles_IDs[EE_Ypogroup_Type::default_associate_role_name];
 			$this->_associate_role = $this->_GRR->get_one_by_ID($associate_role);
 		}
 		
@@ -272,10 +266,11 @@ class YP_Importer{
 	 */
 	protected function _get_group_from_contact_id($contact_id,$primary_member_name){
 		//check if we have have a group for that contact id
+       //EEH_Debug_Tools::printr($contact_id, "contact_id", __FILE__, __LINE__);
 		
 		if( ! array_key_exists($contact_id, $this->_xml_contact_id_to_group_id_mapping) ){
 			//create a new group
-			$group = new EE_YPOGroup($primary_member_name. ", Family, and Associates", 'Automatically created group', $this->_org_group_type->ID());
+			$group = EE_Ypogroup::new_instance(array("GRP_name"=>$primary_member_name. ", Family, and Associates", "GRP_desc"=>'Automatically created group', "GPT_ID"=>$this->_org_group_type->ID()));
 			$group->save();
 			$this->_xml_contact_id_to_group_id_mapping[$contact_id] = $group->ID();
 			unset($group);
@@ -391,7 +386,7 @@ class YP_Importer{
 		if($answer_to_id_question_with_this_id){
             $attendee = $answer_to_id_question_with_this_id->attendee();
             if (! $attendee) {
-                EEH_Debug_Tools::printr($answer_to_id_question_with_this_id, "Question with Null Attendee", __FILE__, __LINE__);
+                //EEH_Debug_Tools::printr($answer_to_id_question_with_this_id, "Question with Null Attendee", __FILE__, __LINE__);
             }
 		}else{
 			//otherwise: there is no attendee with an answer to the id question that matches this $contact_node's, so create a new attendee
@@ -468,15 +463,17 @@ class YP_Importer{
 								$org_member_contact_id = $this->_get_org_member_contact_id_for_related_contact($contact_node);
 								$org_member_name = $this->_get_org_member_name_for_related_contact($contact_node);
 								$member_group_id = $this->_get_group_from_contact_id($org_member_contact_id, $org_member_name);
+                                //EEH_Debug_Tools::printr($this->_spouse_role, "Child Role", __FILE__, __LINE__);
+                                //EEH_Debug_Tools::printr($member_group_id, "member_group_id", __FILE__, __LINE__);
 								$attendee->add_role_in_group($this->_spouse_role,$member_group_id);
-								
+                                //EEH_Debug_Tools::printr($attendee, "Attendee", __FILE__, __LINE__);
 								$will_create_wp_user_for_attendee = true;
 								break;
 							case 'Child':
 							case 'child':
 								$org_member_contact_id = $this->_get_org_member_contact_id_for_related_contact($contact_node);
 								$org_member_name = $this->_get_org_member_name_for_related_contact($contact_node);
-								$member_group_id = $this->_get_group_from_contact_id($org_member_contact_id, $org_member_name);
+                                $member_group_id = $this->_get_group_from_contact_id($org_member_contact_id, $org_member_name);
 								$attendee->add_role_in_group($this->_child_role,$member_group_id);
 								break;
 							default:
